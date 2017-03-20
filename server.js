@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/week18day3mongoose");
+mongoose.connect("mongodb://localhost/mongoscraper");
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -50,18 +50,18 @@ db.once("open", function() {
 // A GET request to scrape the echojs website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  request("http://www.echojs.com/", function(error, response, html) {
+  request("http://hosted.ap.org/dynamic/fronts/HOME?SITE=AP&SECTION=HOME", function(error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);
     // Now, we grab every h2 within an article tag, and do the following:
-    $("article h2").each(function(i, element) {
+    $(".topheadline").each(function(i, element) {
 
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this).children("a").text();
-      result.link = $(this).children("a").attr("href");
+      result.link = "http://hosted.ap.org"+$(this).children("a").attr("href");
 
       // Using our Article model, create a new entry
       // This effectively passes the result object to the entry (and the title and link)
@@ -150,7 +150,19 @@ app.post("/articles/:id", function(req, res) {
   });
 });
 
+app.delete("/deleted/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  Article.remove({ "_id": req.params.id }, function (err) {
+    if (err) return handleError(err);
+    // removed!
+  });
+})
 
+app.delete("articles/:id", function(req, res) {
+  Note.remove({ "_id": req.params.id }, function (err) {
+    if (err) return handleError(err);
+  })
+})
 // Listen on port 3000
 app.listen(3000, function() {
   console.log("App running on port 3000!");

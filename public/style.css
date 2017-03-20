@@ -1,0 +1,96 @@
+body { 
+  background-color: white 
+}
+
+#wrapper {
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+}
+#articles {
+  width: 60%;
+  display:inline-block;
+}
+#notes {
+  float: right;
+  width: 30%;
+}
+textarea, input {
+  display: block;
+  width: 100%;
+  background-color: #FCF5C7;
+}
+input {
+  height: 36px;
+  font-size: 24px;
+}
+textarea {
+  height: 200px;
+  font-size: 18px;
+}
+header {
+  background:red;
+  margin: -8px;
+}
+h1 {
+  margin: auto;
+  text-align: center;
+  font-family: sans-serif;
+  color: white;
+  padding: 10px 10px;
+}
+.articleDiv {
+  margin-bottom: 30px;
+  border: 3px solid red;
+  border-radius: 8px;
+  padding: 20px 20px;
+  text-align: center;
+  position:relative;
+}
+.headline {
+  font-weight: bold;
+}
+.closeDiv {
+  position: absolute;
+  right: 95%;
+  font-size: 40px;
+/*  display: inline-grid;*/  
+  margin-top: -11px;
+  color: red;
+}
+.addNote {
+  position: absolute;
+  left: 95%;
+  font-size: 40px;
+  margin-top: -11px;
+  color: #21d621;
+}
+button#scrape {
+   background-color: #21d621;
+   color: white;
+   font-family: sans-serif;
+   border-radius: 8px;
+   height: 28px;
+   border-style: none;
+   width: 107px;
+   font-size: 18px;
+   margin-right: 2%;
+}
+button#deleteAll {
+  background-color: transparent;
+  color: white;
+  font-family: sans-serif;
+  border-radius: 8px;
+  height: 28px;
+  border-style: none;
+  width: 107px;
+  font-size: 18px;
+  border: 2px solid white;
+  margin-left: 2%;
+}
+.buttonDiv {
+  width: 229px;
+  margin: 0px auto;
+  padding-bottom: 12px;
+}
