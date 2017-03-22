@@ -1,0 +1,21 @@
+<header>
+  <h1>Associated Press Story Scraper</h1>
+  <div class="buttonDiv">
+    <button id="scrape" href="#">Scrape!</button>
+    <button id="deleteAll" href="#">Delete All!</button>
+  </div>
+</header>
+<div id="wrapper">
+  <div id="articles">
+  	{{#each articles}}
+  		<div class="articleDiv" data-id='{{this._id}}'>
+  			<span class="headline">{{ this.title }}</span> | <a href="{{this.link}}">Link</a>
+  			<i class='fa fa-comment addNote' aria-hidden='true' data-id='{{this._id}}'></i>
+  			<i class='fa fa-window-close closeDiv' aria-hidden='true' data-id='{{this._id}}'></i>
+  		</div>
+  	{{/each}}
+  </div>
+  <div id="notes">
+  	{{#each notes}}
+  </div>
+</div>

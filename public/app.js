@@ -1,19 +1,19 @@
 // Grab the articles as a json
-getArticles();
-function getArticles() {
-  $.getJSON("/articles", function(data) {
-    // For each one
-    for (var i = 0; i < data.length; i++) {
-      // Display the apropos information on the page
-      var articleDiv = "<div class='articleDiv' data-id='" + data[i]._id + "'>" + 
-        "<span class='headline'>" + data[i].title + "</span> | <a href='" + data[i].link + "'>Link</a>" + 
-        String.fromCharCode(13) + "\&#09" + "<i class='fa fa-comment addNote' aria-hidden='true' data-id='" + 
-        data[i]._id + "'></i>" + String.fromCharCode(13) + "\&#09" + 
-        "<i class='fa fa-window-close closeDiv' aria-hidden='true' data-id='" + data[i]._id + "'></i>";
-      $("#articles").append(articleDiv);
-    }
-  });
-};
+// getArticles();
+// function getArticles() {
+//   $.getJSON("/articles", function(data) {
+//     // For each one
+//     for (var i = 0; i < data.length; i++) {
+//       // Display the apropos information on the page
+//       var articleDiv = "<div class='articleDiv' data-id='" + data[i]._id + "'>" + 
+//         "<span class='headline'>" + data[i].title + "</span> | <a href='" + data[i].link + "'>Link</a>" + 
+//         String.fromCharCode(13) + "\&#09" + "<i class='fa fa-comment addNote' aria-hidden='true' data-id='" + 
+//         data[i]._id + "'></i>" + String.fromCharCode(13) + "\&#09" + 
+//         "<i class='fa fa-window-close closeDiv' aria-hidden='true' data-id='" + data[i]._id + "'></i>";
+//       $("#articles").append(articleDiv);
+//     }
+//   });
+// };
 
 
 // Whenever someone clicks a p tag
@@ -127,6 +127,6 @@ $(document).on("click", "#scrape", function() {
 
     .done(function(data) {
       console.log(data);
-      getArticles();
+      // getArticles();
     })
 })

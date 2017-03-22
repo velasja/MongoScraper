@@ -13,6 +13,8 @@ var Article = require("./models/Article.js");
 // Our scraping tools
 var request = require("request");
 var cheerio = require("cheerio");
+var exphbs = require("express-handlebars");
+
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
@@ -27,8 +29,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Make public a static dir
-app.use(express.static("public"));
+// app.use(express.static("public"));
 
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 // Database configuration with mongoose
 mongoose.connect("mongodb://localhost/mongoscraper");
 var db = mongoose.connection;
@@ -88,15 +92,13 @@ app.get("/scrape", function(req, res) {
 // This will get the articles we scraped from the mongoDB
 app.get("/articles", function(req, res) {
   // Grab every doc in the Articles array
-  Article.find({}, function(error, doc) {
+  Article.find({}, function(data) {
     // Log any errors
-    if (error) {
-      console.log(error);
-    }
-    // Or send the doc to the browser as a json object
-    else {
-      res.json(doc);
-    }
+    var hbsObject = {
+      articles: data
+    };
+    console.log(hbsObject);
+    res.render("index", hbsObject);
   });
 });
 
@@ -161,6 +163,10 @@ app.delete("/deleted/:id", function(req, res) {
 app.delete("articles/:id", function(req, res) {
   Note.remove({ "_id": req.params.id }, function (err) {
     if (err) return handleError(err);
+  }).then(function(Note) {
+    var hbsObject = {
+      notes: Note
+    };
   })
 })
 // Listen on port 3000
